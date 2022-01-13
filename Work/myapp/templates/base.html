@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- CSS only -->
+    <!-- JavaScript Bundle with Popper -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <title>Document</title>
+    <style>
+        @media print {
+           #bottom-nav-bottom{
+               display: none;
+           }
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid mx-5">
+        <a class="navbar-brand my-2 mx-3" href="{% url 'base' %}">Название магазина</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" style="font-size: 30px; color: white"><i class="bi-person"></i></a>
+                </li>
+                <li class="nav-item">
+                    {% if not request.user.is_authenticated %}
+                        <a class="nav-link mt-2" style="font-size: 20px; color: white"
+                           href="{% url 'login' %}">Вход</a>
+                    {% else %}
+                        <a class="nav-link mt-2" style="font-size: 20px; color: white"
+                           href="{% url 'logout' %}">Выход</a>
+                    {% endif %}
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<ul class="nav nav-pills justify-content-center mt-3" id="bottom-nav-bottom">
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" style="color: black; font-size: 20px" data-bs-toggle="dropdown"
+           role="button" aria-expanded="false">Инвентарь</a>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{% url 'income' %}">Приход инвентарь</a></li>
+            <li><a class="dropdown-item" href="{% url 'outcome' %}">Списание инвентарь</a></li>
+        </ul>
+    </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" style="color: black; font-size: 20px" data-bs-toggle="dropdown" href="#"
+           role="button" aria-expanded="false">Отчёты</a>
+        <ul class="dropdown-menu">
+            <li>
+                <a class="dropdown-item" href="{% url 'overall_pay' %}">Отчёт по выручке</a></li>
+            <li><a class="dropdown-item" href="{% url 'overall_name' %}">Отчёт по должникам</a></li>
+        </ul>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" style="color: black; font-size: 20px" href="{% url 'user' %}">Клиенты</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'order' %}" style="color: black; font-size: 20px">Заказы</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'payment' %}" style="color: black; font-size: 20px">Оплата</a>
+    </li>
+</ul>
+{% block content %}
+
+{% endblock %}
+</body>
+</html>

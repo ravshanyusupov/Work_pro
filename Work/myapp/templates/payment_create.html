@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block content %}
+    <style>
+        input {
+            border: none;
+            border-bottom: 1px solid black;
+            width: 20%;
+            outline: none;
+            margin: 3%;
+        }
+
+        div {
+            text-align: center;
+        }
+    </style>
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <a style="text-decoration: none; color: black; font-size: 50px; margin-left: 6%" href="{% url 'payment' %}">&#10229;</a>
+        <div>
+            <h2>Создать приход</h2><br>
+{#            <input type="text" placeholder="Название" name="product_id">#}
+{#            <input type="text" placeholder="Цена" name="prize"><br>#}
+{#            <input type="text" placeholder="Дата" name="date">#}
+{#            <input type="text" placeholder="Кол-во" name="quantity"><br>#}
+{#            <input type="text" placeholder="Вес" name="weight">#}
+{#             <input style="padding: 15px" class="btn bg-light border-dark" type="submit" value="Добавить"  role="button"/>#}
+{#        </div>#}
+    {{ form.user_profile_id }}
+    {{ form.prize }}<br>
+            {{ form.order_id }}
+            {{ form.method_id }}<br>
+        <input type="submit">
+    </form>
+{% endblock %}

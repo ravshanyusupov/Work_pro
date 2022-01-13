@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% block content %}
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #eee;
+            color: #a1a1a1;
+            font-family: sans-serif;
+        }
+
+        .searchInputWrapper {
+            position: relative;
+        }
+
+        .searchInput {
+            width: 10rem;
+            height: 2rem;
+            padding: 0 1rem;
+            border-radius: 2rem;
+            border: none;
+            transition: transform 0.1s ease-in-out;
+        }
+
+        ::placeholder {
+            color: #a1a1a1;
+        }
+
+        /* hide the placeholder text on focus */
+        :focus::placeholder {
+            text-indent: -999px
+        }
+
+        .searchInput:focus {
+            outline: none;
+            transform: scale(1.1);
+            transition: all 0.1s ease-in-out;
+        }
+
+        .searchInputIcon {
+            position: absolute;
+            right: 0.8rem;
+            top: 0.5rem;
+            color: #a1a1a1;
+            transition: all 0.1s ease-in-out;
+        }
+
+        .container:focus-within >
+        .searchInputWrapper > .searchInputIcon {
+            right: 0.2rem;
+        }
+
+        .top-se {
+            display: flex;
+            justify-content: space-between;
+            margin: 0 10%;
+        }
+    </style>
+    <br>
+    <br><br>
+    <div class="container">
+        <table class="table text-center">
+            <thead class="table-dark">
+            <tr>
+                <th scope="col">Имя</th>
+                <th scope="col">Сумма</th>
+                <th scope="col">Дата</th>
+                <th scope="col">Тип аппарата</th>
+                <th scope="col">Заказ</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for x in pay %}
+                <tr>
+                    <td>{{ x.user_profile_id.name }}</td>
+                    <td>{{ x.prize }}</td>
+                    <td>{{ x.update_date }}</td>
+                    <td>{{ x.method_id.method }}</td>
+                    <td>{{ x.order_id_id }}</td>
+                </tr>
+            {% endfor %}
+            <td>Итого</td>
+            <td>{{ payment |floatformat:3 }}</td>
+            </tbody>
+        </table>
+        <br>
+        <a style="float: right; padding: 15px" class="btn bg-light border-dark" href="{% url 'payment_create' %}"
+           role="button">Добавить</a>
+    </div>
+{% endblock %}

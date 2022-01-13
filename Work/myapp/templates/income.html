@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% block content %}
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #eee;
+            color: #a1a1a1;
+            font-family: sans-serif;
+        }
+
+        .searchInputWrapper {
+            position: relative;
+        }
+
+        .searchInput {
+            width: 13rem;
+            height: 2rem;
+            padding: 0 1rem;
+            border-radius: 2rem;
+            border: none;
+            transition: transform 0.1s ease-in-out;
+        }
+
+        ::placeholder {
+            color: #a1a1a1;
+        }
+
+        /* hide the placeholder text on focus */
+        :focus::placeholder {
+            text-indent: -999px
+        }
+
+        .searchInput:focus {
+            outline: none;
+            transform: scale(1.1);
+            transition: all 0.1s ease-in-out;
+        }
+
+        .searchInputIcon {
+            position: absolute;
+            right: 0.8rem;
+            top: 0.5rem;
+            color: #a1a1a1;
+            transition: all 0.1s ease-in-out;
+        }
+
+        .container:focus-within >
+        .searchInputWrapper > .searchInputIcon {
+            right: 0.2rem;
+        }
+
+        .top-se {
+            display: flex;
+            justify-content: space-between;
+            margin: 0 10%;
+        }
+    </style>
+    <div class="top-se mt-5">
+        <h3 style="color: black">Приход инвентаря</h3>
+        <form class="searchInputWrapper">
+            <input class="searchInput" type="text" placeholder='Введите название'>
+            <i class="searchInputIcon fa fa-search"></i>
+            </input>
+        </form>
+    </div>
+    <br>
+    <div class="container">
+        <table class="table text-center">
+            <thead class="table-dark rounded">
+            <tr>
+                <th scope="col">Название</th>
+                <th scope="col">Себестоимость</th>
+                <th scope="col">Кол-во</th>
+                <th scope="col">Сумма</th>
+                <th scope="col">Вес, кг</th>
+                <th scope="col">Дата</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for x in income %}
+                <tr>
+                    <td>{{ x.product_id.name }}</td>
+                    <td>{{ x.product_id.product_prize }}</td>
+                    <td>{{ x.quantity }}</td>
+                    <td>{{ x.overall }}</td>
+{#                    <td>{{ x.product_id.weight }}</td>#}
+                    <td>{{ x.date | date:"SHORT_DATE_FORMAT" }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <br>
+        <a style="float: right; padding: 15px" class="btn bg-light border-dark" href="{% url 'income_create' %}" role="button">Добавить</a>
+    </div>
+{% endblock %}
